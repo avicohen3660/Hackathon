@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
-
 public class Client implements Runnable {
 
 	Socket socketConnection;
@@ -16,13 +15,27 @@ public class Client implements Runnable {
 	Client() throws UnknownHostException, IOException {
 
 		b=new board();
-		socketConnection = new Socket("localhost", 8000);
+		socketConnection = new Socket("192.168.1.29", 8000);
 		outToServer = new DataOutputStream(socketConnection.getOutputStream());
 		din = new DataInputStream(socketConnection.getInputStream());
 
+		Thread tr=new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while (true) {
+					try {
+						System.out.flush();
+						b.getText().setText(din.readUTF());
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		});
+		tr.start();
 		Thread thread;
 		thread = new Thread(this);
-		thread.start();
+		//thread.start();
 
 		BufferedReader br = null;
 		String ClientName = null;
