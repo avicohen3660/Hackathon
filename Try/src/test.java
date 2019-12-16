@@ -22,5 +22,6 @@ public class test {
 		frame.add(label);
 		frame.add(j);
 		frame.setVisible(true);
+		//test
 	}
 }
