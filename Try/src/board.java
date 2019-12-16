@@ -10,7 +10,7 @@ public class board extends JFrame{
         text= new JLabel();
         text.setText("shit");
         this.add(text);
-
+        //od mashu
         this.setVisible(true);
 
     }
