@@ -12,9 +12,10 @@ public class Client implements Runnable {
 	Socket socketConnection;
 	DataOutputStream outToServer;
 	DataInputStream din;
-
+	board b;
 	Client() throws UnknownHostException, IOException {
 
+		b=new board();
 		socketConnection = new Socket("localhost", 8000);
 		outToServer = new DataOutputStream(socketConnection.getOutputStream());
 		din = new DataInputStream(socketConnection.getInputStream());
