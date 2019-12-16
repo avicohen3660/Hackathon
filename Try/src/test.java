@@ -18,6 +18,7 @@ public class test {
 	    
 		JSprite j = new JSprite(im);
 		JLabel label = new JLabel("HEY!");
+		JLabel label = new JLabel("HEYxdfnj! dbg");
 		label.setText("HEY");
 		frame.add(label);
 		frame.add(j);
