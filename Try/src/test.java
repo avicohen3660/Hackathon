@@ -17,10 +17,13 @@ public class test {
 	    //im = new ImageIcon(img.getScaledInstance(-150, 50,  java.awt.Image.SCALE_SMOOTH)); 
 	    
 		JSprite j = new JSprite(im);
+		JLabel label = new JLabel("HEY!");
 		JLabel label = new JLabel("HEYxdfnj! dbg");
 		label.setText("HEY");
 		frame.add(label);
 		frame.add(j);
 		frame.setVisible(true);
+		//test
+		//shit
 	}
 }
