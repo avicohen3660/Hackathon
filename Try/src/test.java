@@ -17,7 +17,7 @@ public class test {
 	    //im = new ImageIcon(img.getScaledInstance(-150, 50,  java.awt.Image.SCALE_SMOOTH)); 
 	    
 		JSprite j = new JSprite(im);
-		JLabel label = new JLabel("HEy");
+		JLabel label = new JLabel("HEY!");
 		label.setText("HEY");
 		frame.add(label);
 		frame.add(j);
