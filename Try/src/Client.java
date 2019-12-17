@@ -1,8 +1,4 @@
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
@@ -11,6 +7,7 @@ public class Client implements Runnable {
 	Socket socketConnection;
 	DataOutputStream outToServer;
 	DataInputStream din;
+	ObjectInputStream oin;
 	board b;
 	Client() throws UnknownHostException, IOException {
 
@@ -18,7 +15,7 @@ public class Client implements Runnable {
 		socketConnection = new Socket("192.168.1.29", 8000);
 		outToServer = new DataOutputStream(socketConnection.getOutputStream());
 		din = new DataInputStream(socketConnection.getInputStream());
-
+		oin = new ObjectInputStream(socketConnection.getInputStream());
 		Thread tr=new Thread(new Runnable() {
 			@Override
 			public void run() {

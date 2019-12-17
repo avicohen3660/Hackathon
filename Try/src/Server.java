@@ -57,11 +57,14 @@ public class Server
 
 					String msgFromClient = din.readUTF();
 					System.out.println(msgFromClient);
+					if(msgFromClient.equals("right"))
+
 					for (int i = 0; i < ClientSockets.size(); i++) {
 						Socket pSocket = (Socket) ClientSockets.elementAt(i);
 						if (ClientSocket.equals(pSocket))
 							continue;
 						DataOutputStream pOut = new DataOutputStream(pSocket.getOutputStream());
+
 						pOut.writeUTF(msgFromClient);
 						pOut.flush();
 					}
