@@ -1,4 +1,4 @@
-public class solider {
+public class Soldier {
     enum type{
         NormalSoldier,
         Archer,
