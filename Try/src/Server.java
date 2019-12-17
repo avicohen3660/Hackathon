@@ -1,6 +1,7 @@
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.LocalDateTime;
@@ -61,9 +62,13 @@ public class Server
 						Socket pSocket = (Socket) ClientSockets.elementAt(i);
 						if (ClientSocket.equals(pSocket))
 							continue;
-						DataOutputStream pOut = new DataOutputStream(pSocket.getOutputStream());
-						pOut.writeUTF(msgFromClient);
-						pOut.flush();
+						//DataOutputStream pOut = new DataOutputStream(pSocket.getOutputStream());
+						//pOut.writeUTF(msgFromClient);
+						//pOut.flush();
+
+						ObjectOutputStream Oout = new ObjectOutputStream((pSocket.getOutputStream()));
+						Oout.writeObject(data);
+						Oout.flush();
 					}
 				}
 			} catch (IOException e) {
