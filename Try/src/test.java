@@ -7,21 +7,24 @@ import javax.swing.JLabel;
 
 public class test {
 	public static void main(String[] args) {
-		
-		JFrame frame = new JFrame("Title");
-		frame.setSize(600,600);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		//frame.pack();
-		ImageIcon im = new ImageIcon(test.class.getResource("/giphy.gif"));
-		//Image img = im.getImage();  
-	    //im = new ImageIcon(img.getScaledInstance(-150, 50,  java.awt.Image.SCALE_SMOOTH)); 
-	    
-		JSprite j = new JSprite(im);
-		JLabel label = new JLabel("HaviEY");
-		label.setText("HEY");
-		frame.add(label);
-		frame.add(j);
-		frame.setVisible(true);
-		//test 2
+		Thread t1 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while(true){
+					System.out.println("hi");
+				}
+			}
+		});
+		Thread t2 = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while(true){
+					System.out.println("hello");
+				}
+			}
+		});
+
+		t1.start();
+		t2.start();
 	}
 }
