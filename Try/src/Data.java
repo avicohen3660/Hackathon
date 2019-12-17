@@ -1,19 +1,17 @@
+import java.io.Serializable;
 import java.util.List;
 
-public class Data {
+public class Data implements Serializable {
     private List<Soldier> soldiers;
+    private int num;
 
-    public List<Soldier> getSoldiers() {
-        return soldiers;
+    public int getNum() {
+        return num;
     }
 
-    public void addSoldier(Soldier s) {
-        this.soldiers.add(s);
-    }
-
-    Data()
+    public Data(int num)
     {
-
+        this.num = num;
     }
 
 }

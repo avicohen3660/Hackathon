@@ -15,7 +15,7 @@ import java.util.Vector;
 public class Server 
 {
 	static Vector<Socket> ClientSockets;
-	Data data = new Data();
+	Data data = new Data(8);
 	int fps = 10;
 	
 	Server() throws IOException
@@ -57,14 +57,14 @@ public class Server
 					System.out.println(msgFromClient);
 					for (int i = 0; i < ClientSockets.size(); i++) {
 						Socket pSocket = (Socket) ClientSockets.elementAt(i);
-						if (ClientSocket.equals(pSocket))
-							continue;
+						//if (ClientSocket.equals(pSocket))
+						//	continue;
 						//DataOutputStream pOut = new DataOutputStream(pSocket.getOutputStream());
 						//pOut.writeUTF(msgFromClient);
 						//pOut.flush();
 
 						//ObjectOutputStream Oout = new ObjectOutputStream((pSocket.getOutputStream()));
-						dout.writeObject(data);
+						dout.writeObject(new Data(7));
 						dout.flush();
 					}
 				}

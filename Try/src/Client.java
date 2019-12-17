@@ -23,7 +23,7 @@ public class Client implements Runnable {
 					try {
 						System.out.flush();
 						//b.getText().setText(din.readUTF());
-						System.out.println((Data)din.readObject());
+						System.out.println(((Data)din.readObject()).getNum());
 					} catch (IOException | ClassNotFoundException e) {
 						e.printStackTrace();
 					}
@@ -40,8 +40,8 @@ public class Client implements Runnable {
 		Scanner input = new Scanner(System.in);
 		String SQL = "";
 		try {
-			System.out.print("Enter you name: ");
-			ClientName = input.next();
+			//System.out.print("Enter you name: ");
+			//ClientName = input.next();
 			// ClientName += ": ";
 			// QUERY PASSING
 
@@ -52,7 +52,7 @@ public class Client implements Runnable {
 
 				SQL = br.readLine();
 				// SQL = input.next();
-				outToServer.writeUTF(ClientName + ": " + SQL);
+				outToServer.writeUTF("ClientName" + ": " + SQL);
 				outToServer.flush();
 				// System.out.println(din.readUTF());
 
