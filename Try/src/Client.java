@@ -5,25 +5,25 @@ import java.util.Scanner;
 public class Client implements Runnable {
 
 	Socket socketConnection;
-	DataOutputStream outToServer;
-	DataInputStream din;
-	ObjectInputStream oin;
+	ObjectOutputStream outToServer;
+	ObjectInputStream din;
 	board b;
 	Client() throws UnknownHostException, IOException {
 
 		b=new board();
 		socketConnection = new Socket("192.168.1.29", 8000);
-		outToServer = new DataOutputStream(socketConnection.getOutputStream());
-		din = new DataInputStream(socketConnection.getInputStream());
-		oin = new ObjectInputStream(socketConnection.getInputStream());
+		outToServer = new ObjectOutputStream(socketConnection.getOutputStream());
+		din = new ObjectInputStream(socketConnection.getInputStream());
+
 		Thread tr=new Thread(new Runnable() {
 			@Override
 			public void run() {
 				while (true) {
 					try {
 						System.out.flush();
-						b.getText().setText(din.readUTF());
-					} catch (IOException e) {
+						//b.getText().setText(din.readUTF());
+						System.out.println((Data)din.readObject());
+					} catch (IOException | ClassNotFoundException e) {
 						e.printStackTrace();
 					}
 				}

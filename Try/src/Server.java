@@ -1,7 +1,4 @@
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.LocalDateTime;
@@ -18,7 +15,7 @@ import java.util.Vector;
 public class Server 
 {
 	static Vector<Socket> ClientSockets;
-	int data = 0;
+	Data data = new Data();
 	int fps = 10;
 	
 	Server() throws IOException
@@ -38,13 +35,13 @@ public class Server
 	
 	class AcceptClient extends Thread {
 		Socket ClientSocket;
-		DataInputStream din;
-		DataOutputStream dout;
+		ObjectInputStream din;
+		ObjectOutputStream dout;
 
 		AcceptClient(Socket client) throws IOException {
 			ClientSocket = client;
-			din = new DataInputStream(ClientSocket.getInputStream());
-			dout = new DataOutputStream(ClientSocket.getOutputStream());
+			din = new ObjectInputStream(ClientSocket.getInputStream());
+			dout = new ObjectOutputStream(ClientSocket.getOutputStream());
 
 			ClientSockets.add(ClientSocket);
 
@@ -66,9 +63,9 @@ public class Server
 						//pOut.writeUTF(msgFromClient);
 						//pOut.flush();
 
-						ObjectOutputStream Oout = new ObjectOutputStream((pSocket.getOutputStream()));
-						Oout.writeObject(data);
-						Oout.flush();
+						//ObjectOutputStream Oout = new ObjectOutputStream((pSocket.getOutputStream()));
+						dout.writeObject(data);
+						dout.flush();
 					}
 				}
 			} catch (IOException e) {
