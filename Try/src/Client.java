@@ -8,7 +8,7 @@ public class Client implements Runnable {
 	ObjectOutputStream outToServer;
 	ObjectInputStream din;
 	board b;
-	//
+	
 	Client() throws UnknownHostException, IOException {
 
 		b=new board();
