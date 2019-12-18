@@ -5,16 +5,16 @@ import java.util.Scanner;
 public class Client implements Runnable {
 
 	Socket socketConnection;
-	ObjectOutputStream outToServer;
-	ObjectInputStream din;
+	DataOutputStream outToServer;
+	ObjectInputStream oIn;
 	board b;
 	
 	Client() throws UnknownHostException, IOException {
 
 		b=new board();
 		socketConnection = new Socket("192.168.1.29", 8000);
-		outToServer = new ObjectOutputStream(socketConnection.getOutputStream());
-		din = new ObjectInputStream(socketConnection.getInputStream());
+		outToServer = new DataOutputStream(socketConnection.getOutputStream());
+		oIn = new ObjectInputStream(socketConnection.getInputStream());
 
 		Thread tr=new Thread(new Runnable() {
 			@Override
@@ -23,7 +23,7 @@ public class Client implements Runnable {
 					try {
 						System.out.flush();
 						//b.getText().setText(din.readUTF());
-						System.out.println(((Data)din.readObject()).getNum());
+						System.out.println(((Data)oIn.readObject()).getNum());
 					} catch (IOException | ClassNotFoundException e) {
 						e.printStackTrace();
 					}
@@ -75,7 +75,8 @@ public class Client implements Runnable {
 				 * 20-text.length(); i++) { text="  "+text; } System.out.println(text);
 				 */
 				System.out.flush();
-				System.out.println(din.readUTF());
+				System.out.println(oIn.readUTF());
+				System.out.println("If we are here we are fucked!");
 
 			} catch (IOException e) {
 				e.printStackTrace();
