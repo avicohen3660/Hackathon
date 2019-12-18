@@ -1,7 +1,6 @@
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.LocalDateTime;
@@ -39,12 +38,12 @@ public class Server
 	class AcceptClient extends Thread {
 		Socket ClientSocket;
 		DataInputStream din;
-		ObjectOutputStream oOut;
+		DataOutputStream dout;
 
 		AcceptClient(Socket client) throws IOException {
 			ClientSocket = client;
 			din = new DataInputStream(ClientSocket.getInputStream());
-			oOut = new ObjectOutputStream(ClientSocket.getOutputStream());
+			dout = new DataOutputStream(ClientSocket.getOutputStream());
 
 			ClientSockets.add(ClientSocket);
 
@@ -55,21 +54,16 @@ public class Server
 		public void run() {
 			try {
 				while (true) {
-					System.out.println("h'l");
+
 					String msgFromClient = din.readUTF();
 					System.out.println(msgFromClient);
 					for (int i = 0; i < ClientSockets.size(); i++) {
 						Socket pSocket = (Socket) ClientSockets.elementAt(i);
 						if (ClientSocket.equals(pSocket))
 							continue;
-
-						//DataOutputStream pOut = new DataOutputStream(pSocket.getOutputStream());
-						//pOut.s(msgFromClient);
-						//pOut.flush();
-
-						//ObjectOutputStream Oout = new ObjectOutputStream((pSocket.getOutputStream()));
-						oOut.writeObject(new Data(7));
-						oOut.flush();
+						DataOutputStream pOut = new DataOutputStream(pSocket.getOutputStream());
+						pOut.writeUTF(msgFromClient);
+						pOut.flush();
 					}
 				}
 			} catch (IOException e) {
@@ -83,4 +77,3 @@ public class Server
 		Server server = new Server();
 	}
 }
-
