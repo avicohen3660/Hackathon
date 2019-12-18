@@ -6,14 +6,14 @@ import java.util.Scanner;
 public class Client implements Runnable {
 
 	Socket socketConnection;
-	DataOutputStream outToServer;
+	ObjectOutputStream outToServer;
 	ObjectInputStream din;
 	//board b;
 	Client() throws UnknownHostException, IOException {
 
 		//b=new board();
 		socketConnection = new Socket("localhost", 8000);
-		outToServer = new DataOutputStream(socketConnection.getOutputStream());
+		outToServer = new ObjectOutputStream(socketConnection.getOutputStream());
 		din = new ObjectInputStream(socketConnection.getInputStream());
 
 		Thread thread;

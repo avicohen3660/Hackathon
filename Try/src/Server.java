@@ -1,7 +1,4 @@
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.LocalDateTime;
@@ -38,16 +35,16 @@ public class Server
 
 	class AcceptClient extends Thread {
 		Socket ClientSocket;
-		DataInputStream in;
+		ObjectInputStream in;
 		ObjectOutputStream out;
 
 		AcceptClient(Socket client) throws IOException {
 			ClientSocket = client;
-			in = new DataInputStream(ClientSocket.getInputStream());
+			in = new ObjectInputStream(ClientSocket.getInputStream());
 			out = new ObjectOutputStream(ClientSocket.getOutputStream());
 
 			ClientSockets.add(ClientSocket);
-
+			//out.reset();
 			start();
 
 		}
