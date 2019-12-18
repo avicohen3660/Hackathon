@@ -1,4 +1,6 @@
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.LocalDateTime;
@@ -35,16 +37,16 @@ public class Server
 
 	class AcceptClient extends Thread {
 		Socket ClientSocket;
-		ObjectInputStream in;
-		ObjectOutputStream out;
+		DataInputStream din;
+		DataOutputStream dout;
 
 		AcceptClient(Socket client) throws IOException {
 			ClientSocket = client;
-			in = new ObjectInputStream(ClientSocket.getInputStream());
-			out = new ObjectOutputStream(ClientSocket.getOutputStream());
+			din = new DataInputStream(ClientSocket.getInputStream());
+			dout = new DataOutputStream(ClientSocket.getOutputStream());
 
 			ClientSockets.add(ClientSocket);
-			//out.reset();
+
 			start();
 
 		}
@@ -53,14 +55,14 @@ public class Server
 			try {
 				while (true) {
 
-					String msgFromClient = in.readUTF();
+					String msgFromClient = din.readUTF();
 					System.out.println(msgFromClient);
 					for (int i = 0; i < ClientSockets.size(); i++) {
 						Socket pSocket = (Socket) ClientSockets.elementAt(i);
 						if (ClientSocket.equals(pSocket))
 							continue;
-						ObjectOutputStream pOut = new ObjectOutputStream(pSocket.getOutputStream());
-						pOut.writeObject(new Object());
+						DataOutputStream pOut = new DataOutputStream(pSocket.getOutputStream());
+						pOut.writeUTF(msgFromClient);
 						pOut.flush();
 					}
 				}

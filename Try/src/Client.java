@@ -1,4 +1,8 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
@@ -6,15 +10,14 @@ import java.util.Scanner;
 public class Client implements Runnable {
 
 	Socket socketConnection;
-	ObjectOutputStream outToServer;
-	ObjectInputStream din;
-	//board b;
+	DataOutputStream outToServer;
+	DataInputStream din;
+
 	Client() throws UnknownHostException, IOException {
 
-		//b=new board();
 		socketConnection = new Socket("localhost", 8000);
-		outToServer = new ObjectOutputStream(socketConnection.getOutputStream());
-		din = new ObjectInputStream(socketConnection.getInputStream());
+		outToServer = new DataOutputStream(socketConnection.getOutputStream());
+		din = new DataInputStream(socketConnection.getInputStream());
 
 		Thread thread;
 		thread = new Thread(this);
@@ -60,9 +63,9 @@ public class Client implements Runnable {
 				 * 20-text.length(); i++) { text="  "+text; } System.out.println(text);
 				 */
 				System.out.flush();
-				System.out.println(din.readObject()+"h");
+				System.out.println(din.readUTF());
 
-			} catch (IOException | ClassNotFoundException e) {
+			} catch (IOException e) {
 				e.printStackTrace();
 			}
 
