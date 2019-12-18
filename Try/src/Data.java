@@ -5,7 +5,8 @@ public class Data implements Serializable {
     private List<Soldier> soldiers;
     private int num;
 
-    public int getNum() {
+    public int getNum()
+    {
         return num;
     }
 
